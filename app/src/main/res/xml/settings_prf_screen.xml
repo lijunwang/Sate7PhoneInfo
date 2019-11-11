@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/frequency_hour">
+
+    <EditTextPreference
+        android:defaultValue="@string/mms_center_default"
+        android:icon="@drawable/settings_mms"
+        android:inputType="number"
+        android:key="settings_mms_center"
+        android:persistent="true"
+        android:summary="@string/mms_center_default"
+        android:title="@string/mms_center" />
+    <EditTextPreference
+        android:icon="@drawable/settings_server"
+        android:key="settings_server_ip"
+        android:persistent="true"
+        android:summary="@string/server_ip_summery"
+        android:title="@string/server_ip" />
+    <EditTextPreference
+        android:defaultValue="@string/server_port_default"
+        android:icon="@drawable/settings_server"
+        android:key="settings_server_port"
+        android:persistent="true"
+        android:summary="@string/server_port_default"
+        android:title="@string/server_port" />
+    <Preference
+        android:icon="@drawable/settings_pwd"
+        android:key="setting_pwd"
+        android:title="@string/pwd" />
+    <ListPreference
+        android:defaultValue="60"
+        android:entries="@array/frequency_entries"
+        android:entryValues="@array/frequency_values"
+        android:icon="@drawable/settings_fre_hour"
+        android:key="setting_frequency"
+        android:persistent="true"
+        android:summary="@string/default_hours"
+        android:title="@string/frequency" />
+    <!--ListPreference
+        android:key="setting_frequency_minute"
+        android:icon="@drawable/settings_fre_hour"
+        android:entries="@array/minutes"
+        android:entryValues="@array/minutes_value"
+        android:title="@string/frequency_minute"
+        android:persistent="true"
+        android:defaultValue="0"
+        android:summary="@string/default_minute"/-->
+    <SwitchPreference
+        android:key="upload_sound"
+        android:summaryOff="@string/upload_success_sound_off"
+        android:summaryOn="@string/upload_success_sound_on"
+        android:defaultValue="true"
+        android:persistent="true"
+        android:title="@string/upload_success_sound"/>
+    <SwitchPreference
+        android:key="upload_vibrate"
+        android:defaultValue="true"
+        android:persistent="true"
+        android:summaryOff="@string/upload_success_vibrate_off"
+        android:summaryOn="@string/upload_success_vibrate_on"
+        android:title="@string/upload_success_vibrate"/>
+</PreferenceScreen>

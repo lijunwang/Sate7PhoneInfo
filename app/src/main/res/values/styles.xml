@@ -1,0 +1,45 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Settings" parent="Theme.AppCompat">
+        <item name="android:windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.SelfActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="SettingsTheme" parent="android:Theme.Holo.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">@style/actionbar_def_style</item>
+        <item name="android:icon">@null</item>
+        <item name="android:actionBarTabTextStyle">@style/actionbar_def_tab_style</item>
+    </style>
+
+    <style name="actionbar_def_style" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@android:color/holo_red_light</item>
+        <item name="android:titleTextStyle">@style/actionbar_def_title_style</item>
+    </style>
+
+    <style name="actionbar_def_tab_style" parent="@android:style/Widget.Holo.Light.ActionBar.TabText">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="actionbar_def_title_style" parent="@android:style/Widget.Holo.Light.ActionBar.TabText">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">24px</item>
+    </style>
+</resources>

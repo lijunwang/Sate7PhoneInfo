@@ -1,0 +1,111 @@
+<resources>
+    <string name="app_name">Sate7PhoneInfo</string>
+    <string name="activity_callLog">通话信息</string>
+    <string name="dialog_location_title">开启位置服务，获取精准定位</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_open">去开启</string>
+    <string name="info_title_imei">IMEI</string>
+    <string name="info_title_hardware">硬件信息</string>
+    <string name="info_title_software">软件信息</string>
+    <string name="info_title_manufacture">制造商</string>
+    <string name="info_title_brand">品牌型号</string>
+    <string name="info_title_callLog">通话记录</string>
+    <string name="detail">详情请点击</string>
+    <string name="info_title_lanlong">经纬度</string>
+    <string name="lan_lon">经度:%f\n纬度:%f</string>
+    <string name="info_title_battery">电池电量</string>
+    <string name="info_title_number">电话号码</string>
+    <string name="info_title_signal">信号强度</string>
+    <string name="call_duration">通话时长:%d秒</string>
+    <string name="battery_level">%d</string>
+    <string name="frequency">上报频率</string>
+    <string name="frequency_hour">上报频率(小时数)</string>
+    <string name="frequency_minute">上报频率(分钟数)</string>
+    <string name="server">服务器设置</string>
+    <string name="server_ip">服务器IP地址</string>
+    <string name="server_ip_summery">数据将上报到此服务器</string>
+    <string name="server_port">服务器端口</string>
+    <string name="server_port_default">8088</string>
+    <string name="mms_center">转发号码</string>
+    <string name="mms_center_default">18682145730</string>
+    <string name="mms_center_summery">数据将上报到此服务中心</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="pwd">修改密码</string>
+    <string name="settings">设置</string>
+    <string name="guest_pwd">请设置手势密码</string>
+    <string name="guest_pwd_1">请绘制解锁密码</string>
+    <string name="mms_center_number">18098910160</string>
+    <string name="test_number">18682145730</string>
+    <string name="test_first">单次上报</string>
+    <string name="test_frequency">间隔上报</string>
+    <string name="test_control">控制上报测试</string>
+    <string name="test_continue">连续快速上报</string>
+    <string name="default_hours">每隔一个小时</string>
+    <string name="report_success">数据上报成功</string>
+    <string name="upload_success_sound">声音提示</string>
+    <string name="upload_success_sound_on">上报成功时播放音效</string>
+    <string name="upload_success_sound_off">上报成功时不播放音效</string>
+    <string name="upload_success_vibrate">震动提示</string>
+    <string name="upload_success_vibrate_on">上报成功时手机震动</string>
+    <string name="upload_success_vibrate_off">上报成功时手机不震动</string>
+
+    <string-array name="frequency_entries">
+        <item>每隔10分钟</item>
+        <item>每隔30分钟</item>
+        <item>每隔一个小时</item>
+        <item>每隔二个小时</item>
+        <item>每隔六个个小时</item>
+        <item>每隔十二个小时</item>
+        <item>每隔二十四个小时</item>
+    </string-array>
+    <string-array name="frequency_values">
+        <item>10</item>
+        <item>30</item>
+        <item>60</item>
+        <item>120</item>
+        <item>360</item>
+        <item>720</item>
+        <item>1440</item>
+    </string-array>
+    <string-array name="hours">
+        <item>每隔零小时</item>
+        <item>每隔一个小时</item>
+        <item>每隔二个小时</item>
+        <item>每隔四个小时</item>
+        <item>每隔六个个小时</item>
+        <item>每隔八个小时</item>
+        <item>每隔十二个小时</item>
+        <item>每隔二十四个小时</item>
+    </string-array>
+    <string-array name="hours_value">
+        <item>0</item>
+        <item>60</item>
+        <item>120</item>
+        <item>240</item>
+        <item>360</item>
+        <item>480</item>
+        <item>720</item>
+        <item>1440</item>
+    </string-array>
+
+    <string name="default_minute">零分</string>
+    <string-array name="minutes">
+        <item>零分</item>
+        <item>零10分</item>
+        <item>零20分</item>
+        <item>零30分</item>
+        <item>零40分</item>
+        <item>零50分</item>
+        <item>零60分</item>
+    </string-array>
+
+    <string-array name="minutes_value">
+        <item>0</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+    </string-array>
+</resources>
