@@ -1,8 +1,10 @@
 package get.hard.sate7phoneinfo.client;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.google.common.io.BaseEncoding;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,9 +19,18 @@ import java.net.URL;
 
 import get.hard.sate7phoneinfo.PhoneInfoApp;
 import get.hard.sate7phoneinfo.XLog;
+import get.hard.sate7phoneinfo.bean.V1ReportBean;
+import get.hard.sate7phoneinfo.pattern.SharedPreferencesUtil;
 import get.hard.sate7phoneinfo.util.ConvertUtil;
 import get.hard.sate7phoneinfo.util.NotificationHelper;
+import get.hard.sate7phoneinfo.util.V1MmsHelper;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class OkHttpHelper {
     private static final String TAG = "OkHttpHelper";
@@ -118,60 +129,33 @@ public class OkHttpHelper {
         }
     }
 
-    public void testPost(byte[] data) {/*
-        OutputStream os = null;
-        String testData = "{}";
-        JSONObject jsonObj = new JSONObject();
-        try {
-            jsonObj.put("number", "18682145730");
-//            jsonObj.put("data", new String(java.util.Base64.getEncoder().encode(data)));
-//            jsonObj.put("data", new String(Base64.encodeToString(data,Base64.DEFAULT)));
-            jsonObj.put("data", new String(Base64.encodeToString(data, Base64.URL_SAFE)));
-            testData = jsonObj.toString();
-        } catch (JSONException e) {
-            XLog.dReport("testPost JSONException when construct PDU ...");
-            e.printStackTrace();
-        }
-        try {
-            URL serverUrl = new URL("https://qx.tsingk.net/api/v1/device/internal/forward");
-            HttpURLConnection conn = (HttpURLConnection) serverUrl.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
-            conn.setRequestProperty("cache-control", "no-cache");
-            os = conn.getOutputStream();
-            os.write(testData.getBytes());
-            int respCode = conn.getResponseCode();
 
-            InputStream is = conn.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-            String line;
-            StringBuilder builder = new StringBuilder();
-            while ((line = reader.readLine()) != null) {
-                builder.append("\n").append(line);
+    public void reportWithJsonFormat(V1ReportBean reportBean) {
+        Gson gson = new Gson();
+        String content = gson.toJson(reportBean);
+        XLog.dReport("reportWithJsonFormat == " + reportBean.getImei() + "," + content);
+        String url = "Https://qx-new.tsingk.net/api/v1/device/report/v1";
+        OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), content);
+        final Request request = new Request.Builder().
+                addHeader("user_name", "vuser1").
+                addHeader("pass", "vuser1").
+                url(url).post(body).build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                XLog.dReport("onFailure ... " + e.getMessage());
             }
-            JSONObject jsonObject = new JSONObject(builder.toString());
-            int state = jsonObject.getInt("code");
-            XLog.dReport("Test is ok state = " + state + "," + builder.toString());
 
-            if (respCode == HttpURLConnection.HTTP_OK && state == 0) {
-                XLog.dReport("Forward SMS successfully test !");
-                NotificationHelper.notifyReportSuccess(true,true,true);
-            } else {
-//                Log.e(TAG, "HTTP response is " + respCode);
-                XLog.dReport("HTTP response is  " + respCode);
-            }
-        } catch (Exception e) {
-            XLog.dReport("Exception when forward SMS using HttpURLConnection!");
-            e.printStackTrace();
-        } finally {
-            if (os != null) {
-                try {
-                    os.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                XLog.dReport("onResponse ... " + response.isSuccessful() + "," + response.code());
+                XLog.dReport("onResponse message ... " + response.message());
+                XLog.dReport("onResponse body ... " + response.body().string());
+                if (response.isSuccessful()) {
+                    NotificationHelper.notifyReportSuccess();
                 }
             }
-        }
-        XLog.dReport("success 22...");*/
+        });
     }
 }

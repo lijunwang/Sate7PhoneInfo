@@ -4,6 +4,8 @@ import java.util.List;
 
 
 public class V1ReportBean {
+    //see at https://wiki.tsingk.net:8443/pages/viewpage.action?pageId=65754
+    private String type;//device type
     private String imei;
     private String sw;
     private String hw;
@@ -14,6 +16,14 @@ public class V1ReportBean {
     private List<OnOffRecs> onOffRecs;
     private List<CallLogRecs> callLogRecs;
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public void setImei(String imei) {
         this.imei = imei;
     }
@@ -21,7 +31,6 @@ public class V1ReportBean {
     public String getImei() {
         return imei;
     }
-
 
     public void setSw(String sw) {
         this.sw = sw;
@@ -94,77 +103,78 @@ public class V1ReportBean {
         return callLogRecs;
     }
 
+
+    public static class OnOffRecs {
+
+        private String date;
+        private int type;
+
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+
+        public void setType(int type) {
+            this.type = type;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+    }
+
+    public static class CallLogRecs {
+
+        private String date;
+        private int duration;
+        private int number;
+        private int type;
+
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+
+        public void setDuration(int duration) {
+            this.duration = duration;
+        }
+
+        public int getDuration() {
+            return duration;
+        }
+
+
+        public void setNumber(int number) {
+            this.number = number;
+        }
+
+        public int getNumber() {
+            return number;
+        }
+
+
+        public void setType(int type) {
+            this.type = type;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+    }
 }
 
-class OnOffRecs {
-
-    private String date;
-    private int type;
 
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-}
-
-
-class CallLogRecs {
-
-    private String date;
-    private int duration;
-    private int number;
-    private int type;
-
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-}
-//===========================
 

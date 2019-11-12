@@ -5,8 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.provider.Telephony;
 import android.telephony.SmsMessage;
+import android.util.Base64;
 
+import com.google.gson.Gson;
+
+import get.hard.sate7phoneinfo.R;
 import get.hard.sate7phoneinfo.XLog;
+import get.hard.sate7phoneinfo.bean.V1ReportBean;
+import get.hard.sate7phoneinfo.util.CompressUtils;
 import get.hard.sate7phoneinfo.util.M2MHelper;
 import get.hard.sate7phoneinfo.util.P1Helper;
 import get.hard.sate7phoneinfo.util.V1MmsHelper;
@@ -28,9 +34,21 @@ public class MmsReceiver extends BroadcastReceiver {
             for (SmsMessage smsMessage : messages) {
                 sb.append(smsMessage.getMessageBody());
             }
-            XLog.d("V1MmsHelper", "onReceive v1 ... " + body + "," + sb.toString());
-//            V1MmsHelper.parseAndReportToServer(context, body);
-            V1MmsHelper.parseAndReportToServer(context, sb.toString());
+            XLog.dReport("onReceive v1 ... " + body + "," + sb.toString());
+            boolean isV1 = false;
+            try {
+                Gson gson = new Gson();
+                String afterUncompress = CompressUtils.uncompressToString(Base64.decode(sb.toString(), Base64.DEFAULT));
+                V1ReportBean v1ReportBean = gson.fromJson(afterUncompress, V1ReportBean.class);
+                isV1 = v1ReportBean.getType().equals(context.getResources().getString(R.string.device_type_v1));
+                XLog.dReport("isV1 ... " + v1ReportBean.getType());
+                V1MmsHelper.parseAndReportToServer(sb.toString());
+            } catch (Exception e) {
+                isV1 = false;
+            }
+            if (isV1) {
+                return;
+            }
         }
         if (intent.getAction().equals(SMS_RECEIVED_ACTION) && M2M_FORWARD) {
             SmsMessage[] messages = Telephony.Sms.Intents.getMessagesFromIntent(intent);
@@ -40,7 +58,6 @@ public class MmsReceiver extends BroadcastReceiver {
             XLog.dMms("body ww22 == " + body + ",address = " + address);
             String test = "Time:2019-10-11-17-41,IMEI:860106000336556,LNG:113.853443E,LAT:22.585754N";
             M2MHelper.send2Server(body, address);
-            return;
         }
         if (intent.getAction().equals(SMS_RECEIVED_ACTION)) {
             SmsMessage[] messages = Telephony.Sms.Intents.getMessagesFromIntent(intent);

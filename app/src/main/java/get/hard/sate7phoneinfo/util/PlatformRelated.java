@@ -20,7 +20,8 @@ public class PlatformRelated {
             Method method = property.getDeclaredMethod("get", String.class);
             String brand = (String) method.invoke(null, "ro.product.brand");
             XLog.d("PlatformRelated brand = " + brand);
-            return sate7.equals(brand);
+//            return sate7.equals(brand);
+            return false;
         } catch (Exception e) {
             e.printStackTrace();
             XLog.d("PlatformRelated Exception:" + e.getMessage());

@@ -602,13 +602,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                         "IAIIAQURAQHWhjADCAEFEQUSOTSFNFFYVC1QMS1WMS4zLjEAAAAAAAAAVlhYAAAAAAA=\n";
                 switch (bodyIndex) {
                     case 1:
-//                        P1Helper.send2Server(body1, "17400310065");
-                        new Thread() {
-                            @Override
-                            public void run() {
-                                OkHttpHelper.getInstance().reportByPost(ConvertUtil.hexStringToByte(body1));
-                            }
-                        }.start();
+                        P1Helper.send2Server(body1, "17400310065");
+//                        new Thread() {
+//                            @Override
+//                            public void run() {
+//                                OkHttpHelper.getInstance().reportByPost(ConvertUtil.hexStringToByte(body1));
+//                            }
+//                        }.start();
                         break;
                     case 2:
                         P1Helper.send2Server(body2, "17400310065");

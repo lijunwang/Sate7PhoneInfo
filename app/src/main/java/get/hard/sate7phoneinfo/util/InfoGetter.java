@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CallLog;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 
 import com.qx.protocol.ReportDataCallLog;
 
@@ -58,11 +59,12 @@ public class InfoGetter {
 
     @SuppressLint("MissingPermission")
     public static String getImei(Context context) {
-        if (PlatformRelated.isV1()) {
+        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        String imei = telephonyManager.getDeviceId();
+        if (TextUtils.isEmpty(imei)) {
             return PlatformRelated.getFakeImei(context);
         } else {
-            TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-            return telephonyManager.getDeviceId();
+            return imei;
         }
     }
 }

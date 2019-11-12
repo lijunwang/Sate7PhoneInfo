@@ -11,7 +11,7 @@ import get.hard.sate7phoneinfo.PhoneInfoApp;
 
 public class SharedPreferencesUtil {
     private static SharedPreferencesUtil instance;
-
+    public static  final String MMSCenterKey = "settings_mms_center";
     private SharedPreferences.Editor editor;
     private SharedPreferences prefer;
 

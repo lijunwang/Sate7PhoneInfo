@@ -3,9 +3,13 @@ package get.hard.sate7phoneinfo.util;
 import android.content.Context;
 import android.util.Base64;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 
 import get.hard.sate7phoneinfo.XLog;
+import get.hard.sate7phoneinfo.bean.V1ReportBean;
+import get.hard.sate7phoneinfo.client.OkHttpHelper;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -24,22 +28,24 @@ public class V1MmsHelper {
             MmsSender.sendSms(context, number, raw);
         } catch (IOException e) {
             e.printStackTrace();
-            XLog.d(TAG, "transferByMms IOException ..." + e.getMessage());
+            XLog.dReport("transferByMms IOException ..." + e.getMessage());
         }
-        XLog.d(TAG, "raw in == " + jsonString);
-        XLog.d(TAG, "raw after == " + raw);
+        XLog.dReport("transferByMms number == " + number);
+        XLog.dReport("raw in == " + jsonString);
+        XLog.dReport("raw after == " + raw);
 
     }
 
-    public static void parseAndReportToServer(Context context, String body) {
-        XLog.d(TAG,"parseAndReportToServer body == "  + body);
+    public static void parseAndReportToServer(String body) {
+        XLog.dReport("parseAndReportToServer body == "  + body);
         String parsed = CompressUtils.uncompressToString(Base64.decode(body, Base64.DEFAULT));
-        XLog.d(TAG,"parseAndReportToServer parsed == "  + parsed);
-        post2Server(parsed);
+        XLog.dReport("parseAndReportToServer parsed == "  + parsed);
+//        post2Server(parsed);
+        OkHttpHelper.getInstance().reportWithJsonFormat(new Gson().fromJson(parsed, V1ReportBean.class));
     }
 
     private static void post2Server(String json) {
-        XLog.d(TAG, "testNew 22 ... " + json);
+        XLog.dReport("testNew 22 ... " + json);
         String url = "Https://qx-new.tsingk.net/api/v1/device/report/v1";
         OkHttpClient okHttpClient = new OkHttpClient();
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8")
@@ -51,14 +57,14 @@ public class V1MmsHelper {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                XLog.d(TAG, "onFailure ... " + e.getMessage());
+                XLog.dReport("onFailure ... " + e.getMessage());
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                XLog.d(TAG, "onResponse ... " + response.isSuccessful());
-                XLog.d(TAG, "onResponse message ... " + response.message());
-                XLog.d(TAG, "onResponse body ... " + response.body().string());
+                XLog.dReport("onResponse ... " + response.isSuccessful());
+                XLog.dReport("onResponse message ... " + response.message());
+                XLog.dReport("onResponse body ... " + response.body().string());
             }
         });
     }

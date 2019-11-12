@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="json_format">true</bool>
+    <string name="device_type_v1">QX_DEVICE_TYPE_V1</string>
+    <string name="device_type_p1">QX_DEVICE_TYPE_P1</string>
+    <string name="device_type_m2m">QX_DEVICE_TYPE_M2M</string>
+</resources>
